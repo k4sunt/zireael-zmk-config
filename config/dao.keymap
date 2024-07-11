@@ -34,10 +34,10 @@
         default_layer {
             label = "MAIN";
             bindings = <
-&kp ESC                  &kp Q  &kp W  &kp F      &kp P            &kp B            &kp J        &kp L           &kp U                &kp Y               &kp SINGLE_QUOTE  &kp LBKT
-&mt RIGHT_COMMAND GRAVE  &kp A  &kp R  &kp S      &kp T            &kp G            &kp M        &kp N           &kp E                &kp I               &kp O             &kp RBKT
-&mt LALT MINUS           &kp Z  &kp X  &kp C      &kp D            &kp V            &kp K        &kp H           &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SEMICOLON     &mt RIGHT_CONTROL SLASH
-                                       &lt 2 TAB  &mt LSHFT SPACE  &lt 1 C_AC_UNDO  &lt 1 ENTER  &mt RSHFT BSPC  &lt 2 DEL
+&mt ESC TAB             &kp Q  &kp W  &kp F  &kp P  &kp B      &kp J                    &kp L           &kp U                &kp Y               &kp SINGLE_QUOTE  &kp LBKT
+&kp GRAVE               &kp A  &kp R  &kp S  &kp T  &kp G      &kp M                    &kp N           &kp E                &kp I               &kp O             &kp RBKT
+&mt LEFT_CONTROL MINUS  &kp Z  &kp X  &kp C  &kp D  &kp V      &kp K                    &kp H           &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SEMICOLON     &mt RIGHT_ALT SLASH
+                                      &to 2  &to 1  &kp ENTER  &mt RIGHT_COMMAND SPACE  &mt RSHFT BSPC  &lt 2 DEL
             >;
         };
 
