@@ -53,10 +53,10 @@
         raise_layer {
             label = "DOP";
             bindings = <
-&trans  &kp DELETE     &trans            &kp UNDERSCORE  &kp PLUS     &kp PAGE_UP    &trans            &trans          &trans      &kp BACKSLASH      &kp PIPE         &trans
-&trans  &kp HOME       &kp END           &kp MINUS       &kp EQUAL    &kp PAGE_DOWN  &kp LEFT          &kp DOWN        &kp UP      &kp RIGHT          &kp K_MENU       &trans
-&trans  &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT  &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &trans
-                                         &kp ESCAPE      &trans       &lt 4 TAB      &trans            &trans          &trans
+&kp ESC  &kp DELETE     &kp INSERT        &kp UNDERSCORE  &kp PLUS     &kp PAGE_UP    &trans            &trans          &trans      &kp BACKSLASH      &kp PIPE         &trans
+&trans   &kp HOME       &kp END           &kp MINUS       &kp EQUAL    &kp PAGE_DOWN  &kp LEFT          &kp DOWN        &kp UP      &kp RIGHT          &kp K_MENU       &trans
+&trans   &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT  &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &trans
+                                          &trans          &trans       &lt 4 TAB      &trans            &trans          &trans
             >;
         };
 
