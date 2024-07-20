@@ -33,10 +33,10 @@
         default_layer {
             label = "MAIN";
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp F             &kp P               &kp B      &kp J            &kp L      &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
-&sk LEFT_ALT    &kp A  &kp R  &kp S             &kp T               &kp G      &kp M            &kp N      &kp E                &kp I               &kp O             &sk RIGHT_ALT
-&sk LEFT_SHIFT  &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl 3
-                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt 1 TAB  &lt 2 BACKSPACE  &kp SPACE  &sk RIGHT_SHIFT
+&kp TAB         &kp Q  &kp W               &kp F               &kp P               &kp B      &kp J            &kp L              &kp U                &kp Y                &kp SINGLE_QUOTE  &kp DELETE
+&sk LEFT_ALT    &kp A  &mt LEFT_CONTROL R  &mt LEFT_COMMAND S  &mt LEFT_SHIFT T    &kp G      &kp M            &mt RIGHT_SHIFT N  &mt RIGHT_COMMAND E  &mt RIGHT_CONTROL I  &kp O             &sk RIGHT_ALT
+&sk LEFT_SHIFT  &kp Z  &kp X               &kp C               &kp D               &kp V      &kp K            &kp H              &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD   &kp SLASH         &sl 3
+                                           &sk LEFT_CONTROL    &mt LEFT_GUI ENTER  &lt 1 TAB  &lt 2 BACKSPACE  &kp SPACE          &sk RIGHT_SHIFT
             >;
         };
 
@@ -53,9 +53,9 @@
         raise_layer {
             label = "DOP";
             bindings = <
-&kp ESC  &kp DELETE     &kp INSERT        &kp UNDERSCORE  &kp PLUS     &kp PAGE_UP    &trans            &trans          &trans      &kp BACKSLASH      &kp PIPE         &trans
-&trans   &kp HOME       &kp END           &kp MINUS       &kp EQUAL    &kp PAGE_DOWN  &kp LEFT          &kp DOWN        &kp UP      &kp RIGHT          &kp K_MENU       &trans
-&trans   &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT  &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &trans
+&kp ESC  &kp DELETE     &kp INSERT        &kp UNDERSCORE  &kp PLUS     &kp PAGE_UP    &trans            &trans          &kp UP_ARROW  &kp BACKSLASH      &kp PIPE         &trans
+&trans   &kp K_MENU     &trans            &kp MINUS       &kp EQUAL    &kp PAGE_DOWN  &kp HOME          &kp LEFT        &kp DOWN      &kp RIGHT          &kp END          &trans
+&trans   &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT    &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &trans
                                           &trans          &trans       &lt 4 TAB      &trans            &trans          &trans
             >;
         };
