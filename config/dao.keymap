@@ -55,7 +55,7 @@
             bindings = <
 &kp ESC  &kp DELETE     &kp INSERT        &kp UNDERSCORE  &kp PLUS     &kp PAGE_UP    &trans            &trans          &kp UP_ARROW  &kp BACKSLASH      &kp PIPE         &trans
 &trans   &kp K_MENU     &trans            &kp MINUS       &kp EQUAL    &kp PAGE_DOWN  &kp HOME          &kp LEFT        &kp DOWN      &kp RIGHT          &kp END          &trans
-&trans   &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT    &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &to 4
+&trans   &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT    &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &sl 4
                                           &trans          &trans       &trans         &trans            &trans          &trans
             >;
         };
