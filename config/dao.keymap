@@ -21,12 +21,140 @@
 / {
     chosen {
         zmk,matrix_transform = &default_transform;
-
         //zmk,matrix_transform = &five_column_transform;
     };
 };
 
 / {
+    // VSCode and C++ development macros
+    macros {
+        // File navigation
+        cmd_p: cmd_p {
+            label = "Ctrl+P";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(P)>;
+        };
+        
+        cmd_palette: cmd_palette {
+            label = "Ctrl+Shift+P";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(P))>;
+        };
+        
+        // Text selection and editing
+        select_next: select_next {
+            label = "Ctrl+D";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(D)>;
+        };
+        
+        comment_line: comment_line {
+            label = "Ctrl+/";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(SLASH)>;
+        };
+        
+        // Line movement
+        move_line_up: move_line_up {
+            label = "Alt+Up";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(UP)>;
+        };
+        
+        move_line_down: move_line_down {
+            label = "Alt+Down";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(DOWN)>;
+        };
+        
+        // Word navigation
+        word_left: word_left {
+            label = "Ctrl+Left";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LEFT)>;
+        };
+        
+        word_right: word_right {
+            label = "Ctrl+Right";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(RIGHT)>;
+        };
+        
+        // Code folding
+        fold_block: fold_block {
+            label = "Ctrl+Shift+[";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(LBKT))>;
+        };
+        
+        unfold_block: unfold_block {
+            label = "Ctrl+Shift+]";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(RBKT))>;
+        };
+        
+        // Find and replace
+        find_replace: find_replace {
+            label = "Ctrl+H";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(H)>;
+        };
+        
+        // Go to definition
+        go_to_def: go_to_def {
+            label = "F12";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp F12>;
+        };
+        
+        // Go to references
+        go_to_refs: go_to_refs {
+            label = "Shift+F12";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(F12)>;
+        };
+        
+        // Toggle sidebar
+        toggle_sidebar: toggle_sidebar {
+            label = "Ctrl+B";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(B)>;
+        };
+        
+        // File tab switching
+        tab_switch: tab_switch {
+            label = "Ctrl+Tab";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(TAB)>;
+        };
+    };
+
+    // Conditional layers for seamless navigation
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        
+        // When both LWR and RSE layers are active, activate FUN layer
+        combo_fun {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -35,28 +163,28 @@
             bindings = <
 &kp TAB         &kp Q  &kp W  &kp F             &kp P               &kp B      &kp J            &kp L      &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
 &sk LEFT_ALT    &kp A  &kp R  &kp S             &kp T               &kp G      &kp M            &kp N      &kp E                &kp I               &kp O             &sk RIGHT_ALT
-&sk LEFT_SHIFT  &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl 3
-                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt 1 TAB  &lt 2 BACKSPACE  &kp SPACE  &sk RIGHT_SHIFT
+&sk LEFT_SHIFT  &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &osl 3
+                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt 1 SPACE  &lt 2 BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
             >;
         };
 
         lower_layer {
-            label = "NUMB";
+            label = "SYMBOL";
             bindings = <
 &trans  &kp EXCLAMATION  &kp AT_SIGN      &kp HASH         &kp DOLLAR        &kp PERCENT      &kp CARET        &kp AMPERSAND      &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSPACE
 &trans  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4   &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_7    &kp KP_NUMBER_8  &kp KP_NUMBER_9       &kp KP_NUMBER_0        &trans
-&mo 4   &trans           &kp TILDE        &kp GRAVE        &kp LEFT_BRACKET  &kp LEFT_BRACE   &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &trans           &trans                &kp LEFT_WIN           &trans
+&mo 4   &trans           &kp TILDE        &kp GRAVE        &kp LEFT_BRACKET  &kp LEFT_BRACE   &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &kp MINUS        &kp EQUAL             &kp SEMICOLON          &kp COLON
                                           &trans           &trans            &trans           &kp BACKSPACE    &trans             &trans
             >;
         };
 
         raise_layer {
-            label = "DOP";
+            label = "VSCODE";
             bindings = <
-&kp ESC  &kp DELETE     &kp INSERT        &kp UNDERSCORE  &kp PLUS     &kp PAGE_UP    &trans            &trans          &kp UP_ARROW  &kp BACKSLASH      &kp PIPE         &trans
-&trans   &kp K_MENU     &trans            &kp MINUS       &kp EQUAL    &kp PAGE_DOWN  &kp HOME          &kp LEFT        &kp DOWN      &kp RIGHT          &kp END          &trans
-&trans   &kp LESS_THAN  &kp GREATER_THAN  &kp K_COPY      &kp K_PASTE  &kp SEMICOLON  &kp K_PLAY_PAUSE  &kp K_PREVIOUS  &kp K_NEXT    &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &trans
-                                          &trans          &trans       &trans         &trans            &trans          &trans
+&kp ESC        &cmd_p         &cmd_palette      &select_next    &comment_line   &find_replace    &go_to_def      &go_to_refs     &kp UP_ARROW    &toggle_sidebar   &tab_switch       &trans
+&trans         &move_line_up  &move_line_down   &word_left      &word_right     &kp LC(F)        &kp HOME        &kp LEFT        &kp DOWN        &kp RIGHT         &kp END           &trans
+&trans         &fold_block    &unfold_block     &kp LC(Z)       &kp LC(Y)       &kp LC(X)        &kp LC(C)       &kp LC(V)       &kp F9          &kp F5            &kp F2            &trans
+                                                &trans          &trans          &trans           &trans          &trans          &trans
             >;
         };
 
@@ -65,7 +193,7 @@
             bindings = <
 &trans  &kp F1    &kp F2      &kp F3   &kp F4  &kp F5   &kp F6                                 &kp F7            &kp F8              &kp F9                                    &kp F10      &trans
 &trans  &kp F11   &kp F12     &kp F13  &trans  &trans   &kp LG(C_AC_DESKTOP_SHOW_ALL_WINDOWS)  &kp RC(UP_ARROW)  &kp RC(DOWN_ARROW)  &kp LG(C_AC_NEXT_KEYBOARD_LAYOUT_SELECT)  &kp RC(F10)  &trans
-&trans  &kp CAPS  &kp INSERT  &trans   &trans  &trans   &trans                                 &trans            &trans              &trans                                    &trans       &kp PRINTSCREEN
+&trans  &kp CAPS  &kp INSERT  &trans   &trans  &trans   &kp K_PLAY_PAUSE                       &kp K_PREVIOUS    &kp K_NEXT          &kp K_VOLUME_DOWN                         &kp K_VOLUME_UP  &kp PRINTSCREEN
                               &trans   &trans  &kp TAB  &kp BACKSPACE                          &trans            &trans
             >;
         };
