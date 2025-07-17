@@ -37,7 +37,7 @@
             #binding-cells = <0>;
             bindings = <&kp LG(P)>;
         };
-sl_once: sl_once {
+sl_once {
     compatible = "zmk,behavior-sticky-layer";
     label = "OSL";
     flavor = "once";
