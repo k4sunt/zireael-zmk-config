@@ -37,12 +37,13 @@
             #binding-cells = <0>;
             bindings = <&kp LG(P)>;
         };
-    behaviors {
-        sl_once: sl_once {
-            compatible = "zmk,behavior-sticky-layer";
-            label = "OSL";
-            flavor = "once";
-        };
+sl_once: sl_once {
+    compatible = "zmk,behavior-sticky-layer";
+    label = "OSL";
+    flavor = "once";
+};
+
+    
     };
 
         
