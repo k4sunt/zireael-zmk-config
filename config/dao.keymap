@@ -14,55 +14,63 @@
 #define FUN 3
 #define BTL 4
 
-&lt { quick_tap_ms = <200>; };
+&lt { 
+    quick_tap_ms = <200>;
+    tapping-term-ms = <200>;
+};
 
-&mt { quick_tap_ms = <200>; };
+&mt { 
+    quick_tap_ms = <200>;
+    tapping-term-ms = <200>;
+};
 
 / {
     chosen {
         zmk,matrix_transform = &default_transform;
-        //zmk,matrix_transform = &five_column_transform;
+    };
+
+    // Sticky layer fix parameters
+    behaviors {
+        sk: sticky_key {
+            release-after-ms = <1000>;
+            quick-release;
+            #binding-cells = <1>;
+        };
+        sl: sticky_layer {
+            release-after-ms = <1000>;
+            #binding-cells = <1>;
+        };
     };
 };
 
 / {
-    // Custom behavior for one-shot layer
-    behaviors {
-        sl_once: sl_once {
-            compatible = "zmk,behavior-sticky-layer";
-            label = "OSL";
-            #binding-cells = <1>;
-            flavor = "once";
-        };
-    };
-
-    // VSCode and C++ development macros
+    // macOS optimized VSCode macros
     macros {
         // File navigation
         cmd_p: cmd_p {
-            label = "Ctrl+P";
+            label = "Cmd+P";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LG(P)>;
         };
         
         cmd_palette: cmd_palette {
-            label = "Ctrl+Shift+P";
+            label = "Cmd+Shift+P";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(LS(P))>;
+            bindings = <&kp LG(LS(P))>;
         };
         
         // Text selection and editing
         select_next: select_next {
-            label = "Ctrl+D";
+            label = "Cmd+D";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LG(D)>;
         };
         
         comment_line: comment_line {
-            label = "Ctrl+/";
+            label = "Cmd+/";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LG(SLASH)>;
@@ -70,55 +78,55 @@
         
         // Line movement
         move_line_up: move_line_up {
-            label = "Alt+Up";
+            label = "Option+Up";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LA(UP)>;
         };
         
         move_line_down: move_line_down {
-            label = "Alt+Down";
+            label = "Option+Down";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LA(DOWN)>;
         };
         
-        // Word navigation
+        // Word navigation (macOS uses Option)
         word_left: word_left {
-            label = "Ctrl+Left";
+            label = "Option+Left";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LG(LEFT)>;
+            bindings = <&kp LA(LEFT)>;
         };
         
         word_right: word_right {
-            label = "Ctrl+Right";
+            label = "Option+Right";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LG(RIGHT)>;
+            bindings = <&kp LA(RIGHT)>;
         };
         
         // Code folding
         fold_block: fold_block {
-            label = "Ctrl+Shift+[";
+            label = "Cmd+Option+[";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(LS(LBKT))>;
+            bindings = <&kp LG(LA(LBKT))>;
         };
         
         unfold_block: unfold_block {
-            label = "Ctrl+Shift+]";
+            label = "Cmd+Option+]";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(LS(RBKT))>;
+            bindings = <&kp LG(LA(RBKT))>;
         };
         
         // Find and replace
         find_replace: find_replace {
-            label = "Ctrl+H";
+            label = "Cmd+Option+F";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LG(H)>;
+            bindings = <&kp LG(LA(F))>;
         };
         
         // Go to definition
@@ -139,7 +147,7 @@
         
         // Toggle sidebar
         toggle_sidebar: toggle_sidebar {
-            label = "Ctrl+B";
+            label = "Cmd+B";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LG(B)>;
@@ -150,18 +158,15 @@
             label = "Ctrl+Tab";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LG(TAB)>;
+            bindings = <&kp LC(TAB)>;
         };
     };
 
-    // Conditional layers for seamless navigation
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        
-        // When both LWR and RSE layers are active, activate FUN layer
         combo_fun {
-            if-layers = <1 2>;
-            then-layer = <3>;
+            if-layers = <LWR RSE>;
+            then-layer = <FUN>;
         };
     };
 
@@ -173,8 +178,8 @@
             bindings = <
 &kp TAB         &kp Q  &kp W  &kp F             &kp P               &kp B      &kp J            &kp L      &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
 &sk LEFT_ALT    &kp A  &kp R  &kp S             &kp T               &kp G      &kp M            &kp N      &kp E                &kp I               &kp O             &sk RIGHT_ALT
-&sk LEFT_SHIFT  &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl_once 3
-                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt 1 SPACE  &lt 2 BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
+&sl LEFT_SHIFT  &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl FUN
+                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt LWR SPACE  &lt RSE BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
             >;
         };
 
@@ -183,7 +188,7 @@
             bindings = <
 &trans  &kp EXCLAMATION  &kp AT_SIGN      &kp HASH         &kp DOLLAR        &kp PERCENT      &kp CARET        &kp AMPERSAND      &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSPACE
 &trans  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4   &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_7    &kp KP_NUMBER_8  &kp KP_NUMBER_9       &kp KP_NUMBER_0        &trans
-&mo 4   &trans           &kp TILDE        &kp GRAVE        &kp LEFT_BRACKET  &kp LEFT_BRACE   &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &kp MINUS        &kp EQUAL             &kp SEMICOLON          &kp COLON
+&mo BTL &trans           &kp TILDE        &kp GRAVE        &kp LEFT_BRACKET  &kp LEFT_BRACE   &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &kp MINUS        &kp EQUAL             &kp SEMICOLON          &kp COLON
                                           &trans           &trans            &trans           &kp BACKSPACE    &trans             &trans
             >;
         };
@@ -193,7 +198,7 @@
             bindings = <
 &kp ESC        &cmd_p         &cmd_palette      &select_next    &comment_line   &find_replace    &go_to_def      &go_to_refs     &kp UP_ARROW    &toggle_sidebar   &tab_switch       &trans
 &trans         &move_line_up  &move_line_down   &word_left      &word_right     &kp LG(F)        &kp HOME        &kp LEFT        &kp DOWN        &kp RIGHT         &kp END           &trans
-&trans         &fold_block    &unfold_block     &kp LG(Z)       &kp LG(Y)       &kp LG(X)        &kp LG(C)       &kp LG(V)       &kp F9          &kp F5            &kp F2            &trans
+&trans         &fold_block    &unfold_block     &kp LG(Z)       &kp LG(LS(Z))   &kp LG(X)        &kp LG(C)       &kp LG(V)       &kp F9          &kp F5            &kp F2            &trans
                                                 &trans          &trans          &trans           &trans          &trans          &trans
             >;
         };
@@ -202,7 +207,7 @@
             label = "FUNC";
             bindings = <
 &trans  &kp F1    &kp F2      &kp F3   &kp F4  &kp F5   &kp F6                                 &kp F7            &kp F8              &kp F9                                    &kp F10      &trans
-&trans  &kp F11   &kp F12     &kp F13  &trans  &trans   &kp LG(C_AC_DESKTOP_SHOW_ALL_WINDOWS)  &kp RC(UP_ARROW)  &kp RC(DOWN_ARROW)  &kp LG(C_AC_NEXT_KEYBOARD_LAYOUT_SELECT)  &kp RC(F10)  &trans
+&trans  &kp F11   &kp F12     &kp F13  &trans  &trans   &kp LG(LA(DOWN))                       &kp LA(UP_ARROW)  &kp LA(DOWN_ARROW)  &kp LG(SPACE)                            &kp LC(F10)  &trans
 &trans  &kp CAPS  &kp INSERT  &trans   &trans  &trans   &kp K_PLAY_PAUSE                       &kp K_PREVIOUS    &kp K_NEXT          &kp K_VOLUME_DOWN                         &kp K_VOLUME_UP  &kp PRINTSCREEN
                               &trans   &trans  &kp TAB  &kp BACKSPACE                          &trans            &trans
             >;
