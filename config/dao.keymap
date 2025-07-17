@@ -17,11 +17,7 @@
 &lt { quick_tap_ms = <200>; };
 
 &mt { quick_tap_ms = <200>; };
-/sl_once {
-    compatible = "zmk,behavior-sticky-layer";
-    label = "OSL";
-    flavor = "once";
-};
+
 
 
 / {
@@ -41,6 +37,14 @@
             #binding-cells = <0>;
             bindings = <&kp LG(P)>;
         };
+    behaviors {
+        sl_once: sl_once {
+            compatible = "zmk,behavior-sticky-layer";
+            label = "OSL";
+            flavor = "once";
+        };
+    };
+
         
         cmd_palette: cmd_palette {
             label = "Ctrl+Shift+P";
