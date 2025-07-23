@@ -14,38 +14,6 @@
 #define FUN 3
 #define BTL 4
 
-&lt { 
-    quick_tap_ms = <200>;
-    tapping-term-ms = <200>;
-};
-
-&mt { 
-    quick_tap_ms = <200>;
-    tapping-term-ms = <200>;
-};
-
-/ {
-    behaviors {
-        sl: sticky_layer {
-            compatible = "zmk,behavior-sticky-layer";
-            label = "Sticky Layer";
-            #binding-cells = <1>;
-            release-after-ms = <300>;
-        };
-
-        sk: sticky_key {
-            compatible = "zmk,behavior-sticky-key";
-            label = "Sticky Key";
-            #binding-cells = <1>;
-            release-after-ms = <300>;
-        };
-    };
-
-    chosen {
-        zmk,matrix_transform = &default_transform;
-    };
-};
-
 / {
     // macOS optimized VSCode macros
     macros {
