@@ -31,7 +31,6 @@
             label = "Sticky Layer";
             #binding-cells = <1>;
             release-after-ms = <300>;
-            flavor = "hold-preferred";
         };
 
         sk: sticky_key {
@@ -39,7 +38,6 @@
             label = "Sticky Key";
             #binding-cells = <1>;
             release-after-ms = <300>;
-            flavor = "hold-preferred";
         };
     };
 
