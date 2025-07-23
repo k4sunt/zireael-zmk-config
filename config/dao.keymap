@@ -25,6 +25,23 @@
 };
 
 / {
+    behaviors {
+        sl: sticky_layer {
+            compatible = "zmk,behavior-sticky-layer";
+            label = "Sticky Layer";
+            #binding-cells = <1>;
+            release-after-ms = <300>;
+            flavor = "hold-preferred";
+        };
+
+        sk: sticky_key {
+            compatible = "zmk,behavior-sticky-key";
+            label = "Sticky Key";
+            #binding-cells = <1>;
+            release-after-ms = <300>;
+            flavor = "hold-preferred";
+        };
+    };
 
     aliases {
         PIPE = &kp LS(BACKSLASH);
@@ -32,19 +49,6 @@
 
     chosen {
         zmk,matrix_transform = &default_transform;
-    };
-
-    // Sticky layer fix parameters
-    behaviors {
-        sk: sticky_key {
-            release-after-ms = <1000>;
-            quick-release;
-            #binding-cells = <1>;
-        };
-        sl: sticky_layer {
-            release-after-ms = <1000>;
-            #binding-cells = <1>;
-        };
     };
 };
 
