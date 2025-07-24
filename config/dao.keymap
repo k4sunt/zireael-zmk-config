@@ -24,16 +24,14 @@
     tapping-term-ms = <200>;
 };
 
-/ {
-    behaviors {
-        // Configure built-in sticky layer with longer release time
-        sl_custom: sticky_layer_custom {
-            compatible = "zmk,behavior-sticky-layer";
-            label = "STICKY_LAYER_CUSTOM";
-            #binding-cells = <1>;
-            release-after-ms = <1000>;
-        };
-    };
+// Configure built-in sticky behaviors with longer release times
+&sl {
+    release-after-ms = <1000>;
+};
+
+&sk {
+    release-after-ms = <1000>;
+};
 
     chosen {
         zmk,matrix_transform = &default_transform;
@@ -173,10 +171,10 @@
         default_layer {
             label = "MAIN";
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp F             &kp P               &kp B      &kp J            &kp L      &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
-&sk LEFT_ALT    &kp A  &kp R  &kp S             &kp T               &kp G      &kp M            &kp N      &kp E                &kp I               &kp O             &sk RIGHT_ALT
-&sl_custom LWR  &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl_custom FUN
-                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt LWR SPACE  &lt RSE BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
+&kp TAB       &kp Q  &kp W  &kp F             &kp P               &kp B      &kp J            &kp L      &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
+&sk LEFT_ALT  &kp A  &kp R  &kp S             &kp T               &kp G      &kp M            &kp N      &kp E                &kp I               &kp O             &sk RIGHT_ALT
+&sl LWR       &kp Z  &kp X  &kp C             &kp D               &kp V      &kp K            &kp H      &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl FUN
+                            &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt LWR SPACE  &lt RSE BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
             >;
         };
 
