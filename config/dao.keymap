@@ -31,12 +31,6 @@
 &sk { release-after-ms = <1000>; };
 
 / {
-    behaviors {
-       sl: sticky-layer {
-           compatible = "zmk,behavior-sticky-layer";
-       };
-    };
-
     chosen { zmk,matrix_transform = &default_transform; };
 
     // macOS optimized VSCode macros
