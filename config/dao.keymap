@@ -16,12 +16,12 @@
 
 &lt { 
     quick_tap_ms = <200>;
-    tapping-term-ms = <200>;
+    tapping_term_ms = <200>;
 };
 
 &mt { 
     quick_tap_ms = <200>;
-    tapping-term-ms = <200>;
+    tapping_term_ms = <200>;
 };
 
 // Configure built-in sticky behaviors with longer release times
@@ -33,12 +33,10 @@
     release-after-ms = <1000>;
 };
 
+/ {
     chosen {
         zmk,matrix_transform = &default_transform;
     };
-};
-
-/ {
     // macOS optimized VSCode macros
     macros {
         // File navigation
