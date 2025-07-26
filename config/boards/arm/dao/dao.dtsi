@@ -7,7 +7,7 @@
 /dts-v1/;
 #include <nordic/nrf52840_qiaa.dtsi>
 
-#include <physical_layouts.dtsi>
+#include <dt-bindings/zmk/matrix_transform.h>
 
 
 / {
@@ -25,7 +25,7 @@
 
 
 	default_transform: keymap_transform_0 {
-		compatible = "zmk,physical-layout";
+		compatible = "zmk,matrix-transform";
 		columns = <12>;
 		rows = <4>;
 
@@ -42,7 +42,7 @@
 	};
 
 	extra_keys_transform: keymap_transform_1 {
-		compatible = "zmk,physical-layout";
+		compatible = "zmk,matrix-transform";
 		columns = <14>;
 		rows = <4>;
 
