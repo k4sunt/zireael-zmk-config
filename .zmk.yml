@@ -1,0 +1,4 @@
+name: Dao Keyboard
+url: https://github.com/k4sunt/zireael-zmk-config.git
+keyboards:
+  - shields/dao
