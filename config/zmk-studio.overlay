@@ -1,0 +1,19 @@
+/ {
+    chosen {
+        zmk,studio = &studio;
+    };
+};
+
+&usbd {
+    status = "okay";
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+};
+
+&studio {
+    compatible = "zmk,studio";
+    status = "okay";
+    cdc = <&cdc_acm_uart0>;
+}; 

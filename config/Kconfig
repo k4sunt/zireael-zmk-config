@@ -1,0 +1,22 @@
+menu "ZMK Studio Configuration"
+    config ZMK_STUDIO
+        bool "Enable ZMK Studio support"
+        default y
+        help
+            This option enables ZMK Studio support for real-time keymap editing.
+
+    config ZMK_STUDIO_USB_CDC
+        bool "Enable USB CDC for ZMK Studio communication"
+        depends on ZMK_STUDIO
+        default y
+        help
+            This option enables USB CDC ACM for communication with ZMK Studio.
+
+    config ZMK_STUDIO_LOG_LEVEL
+        int "ZMK Studio log level"
+        depends on ZMK_STUDIO
+        default 3
+        range 0 4
+        help
+            Set the log level for ZMK Studio debugging (0=off, 4=debug).
+endmenu 
