@@ -9,5 +9,3 @@ manifest:
       import: app/west.yml    
   self:
     path: config
-    cmake-ext:
-      - "-DSHIELD_OVERLAY=studio-rpc-usb-uart"
