@@ -52,5 +52,10 @@
       ]
     }
   },
+  "studio": {
+    "layout": "LAYOUT",
+    "split": true,
+    "usb": true
+  },
   "sensors": []
 }
