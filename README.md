@@ -1,13 +1,25 @@
-# ZMK Firmware for Zireael keyboard
+# ZMK Firmware for Dao keyboard
 
-## Default Zireael
+This is a repository for a ZMK Firmware for both Dao42 and Dao44 keyboards.
 
-### Zireael
+* [main](https://github.com/yumagulovrn/dao-zmk-config/tree/main) branch is for Dao42
+* [dao44](https://github.com/yumagulovrn/dao-zmk-config/tree/dao44) branch is, obviously, for Dao44
+
+## Default keymap
+
+### Dao42
 
 Visual representation of the default keymap in keyboard-layout-editor: [KLE](http://www.keyboard-layout-editor.com/#/gists/67a81f6b83c65abcda5e7f32989a1688)
 
 This layout is heavily inspired by [this](https://github.com/aroum/Watchman-layouts)
 
+### Dao44
+
+Visual representation of the default keymap in keyboard-layout-editor: [KLE](http://www.keyboard-layout-editor.com/#/gists/c6ba0634e5b92366be9f324775394e66)
+
+This layout is heavily inspired by [this](https://github.com/KGOH/Jian-Info)
+
+Because of current ZMK limitations, Dao44 keymap is in the branch [dao44](https://github.com/yumagulovrn/dao-zmk-config/tree/dao44)
 
 ## FAQ
 
@@ -20,7 +32,7 @@ This layout is heavily inspired by [this](https://github.com/aroum/Watchman-layo
 
 ### How to change the keymap?
 
-1. Fork the repository https://github.com/Mposiblee/zireael-zmk-config
+1. Fork the repository https://github.com/yumagulovrn/dao-zmk-config
 2. Make changes to the [dao.keymap](../config/boards/arm/dao/dao.keymap) file in your repository OR use wonderful https://nickcoutsos.github.io/keymap-editor/
 3. Commit changes to your repository
 4. Go to `Actions` tab in your repository

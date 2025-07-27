@@ -5,226 +5,64 @@
  */
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 
 #define DEF 0
 #define LWR 1
 #define RSE 2
-#define FUN 3
-#define BTL 4
+#define ADJ 3
 
-&lt {
-    quick_tap_ms = <200>;
-    tapping_term_ms = <200>;
-};
-
-&mt {
-    quick_tap_ms = <200>;
-    tapping_term_ms = <200>;
-};
-
-// Configure built-in sticky behaviors with longer release times
-
-&sl { release-after-ms = <1000>; };
-
-&sk { release-after-ms = <1000>; };
+&lt { quick_tap_ms = <200>; };
+&mt { quick_tap_ms = <200>; };
 
 / {
     chosen {
         zmk,physical_layout = &dao_crkbd_layout;
         // zmk,physical_layout = &dao_full_layout;
     };
+};
 
-    // macOS optimized VSCode macros
+/ {
+        keymap {
+                compatible = "zmk,keymap";
 
-    macros {
-        // File navigation
+                default_layer {
+                        display-name = "MAIN";
+                        bindings = <
+          &mt LGUI RBKT     &kp Q   &kp W   &kp E         &kp R             &kp T         &kp Y         &kp U            &kp I         &kp O     &kp P      &kp LBKT
+          &mt LCTRL GRAVE   &kp A   &kp S   &kp D         &kp F             &kp G         &kp H         &kp J            &kp K         &kp L     &kp SEMI   &mt RCTRL SQT
+          &mt LALT MINUS    &kp Z   &kp X   &kp C         &kp V             &kp B         &kp N         &kp M            &kp COMMA     &kp DOT   &kp FSLH   &mt RALT BSLH
+                                            &lt RSE TAB   &mt LSHFT SPACE   &lt LWR RET   &lt LWR ESC   &mt RSHFT BSPC   &lt RSE DEL
+                        >;
+                };
+                lower_layer {
+                        display-name = "SYM";
+                        bindings = <
+          &mt LGUI F1      &kp F2     &kp F3   &kp F4        &kp F5     &kp F6      &kp F7      &kp F8     &kp F9        &kp F10    &kp F11    &kp F12
+          &mt LCTRL PLUS   &kp EXCL   &kp AT   &kp HASH      &kp DLLR   &kp PRCNT   &kp CARET   &kp AMPS   &kp STAR      &kp LPAR   &kp RPAR   &mt RCTRL MINUS
+          &mt LALT EQUAL   &kp N1     &kp N2   &kp N3        &kp N4     &kp N5      &kp N6      &kp N7     &kp N8        &kp N9     &kp N0     &kp RALT
+                                               &lt ADJ TAB   &trans     &trans      &trans      &trans     &lt ADJ DEL
+                        >;
+                };
 
-        cmd_p: cmd_p {
-            label = "Cmd+P";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(P)>;
+                raise_layer {
+                        display-name = "NUM";
+                        bindings = <
+          &mt LGUI KP_NUM   &kp KP_SLASH      &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_MINUS   &kp C_VOL_UP   &kp HOME   &kp PSCRN   &kp PG_UP   &kp SLCK          &kp CLCK
+          &mt LCTRL EQUAL   &kp KP_MULTIPLY   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_PLUS    &kp C_MUTE     &kp LEFT   &kp UP      &kp RIGHT   &kp INS           &mt RCTRL  K_APP
+          &kp LALT          &kp KP_N0         &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_DOT     &kp C_VOL_DN   &kp END    &kp DOWN    &kp PG_DN   &kp PAUSE_BREAK   &kp RALT
+                                                          &trans      &trans      &lt ADJ RET    &lt ADJ ESC    &trans     &trans
+                        >;
+                };
+                adjust_layer {
+                        display-name = "ADJ";
+                        bindings = <
+ &bootloader   &studio_unlock &none          &none          &none          &none          &none          &none          &none          &none          &studio_unlock &bootloader
+ &bt BT_CLR    &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4   &bt BT_SEL 4   &bt BT_SEL 3   &bt BT_SEL 2   &bt BT_SEL 1   &bt BT_SEL 0   &bt BT_CLR
+ &sys_reset    &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &sys_reset
+                                             &trans         &none          &trans         &trans         &none          &trans
+                        >;
+                };
         };
-
-        cmd_palette: cmd_palette {
-            label = "Cmd+Shift+P";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(LS(P))>;
-        };
-
-        // Text selection and editing
-
-        select_next: select_next {
-            label = "Cmd+D";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(D)>;
-        };
-
-        comment_line: comment_line {
-            label = "Cmd+/";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(SLASH)>;
-        };
-
-        // Line movement
-
-        move_line_up: move_line_up {
-            label = "Option+Up";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LA(UP)>;
-        };
-
-        move_line_down: move_line_down {
-            label = "Option+Down";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LA(DOWN)>;
-        };
-
-        // Word navigation (macOS uses Option)
-
-        word_left: word_left {
-            label = "Option+Left";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LA(LEFT)>;
-        };
-
-        word_right: word_right {
-            label = "Option+Right";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LA(RIGHT)>;
-        };
-
-        // Code folding
-
-        fold_block: fold_block {
-            label = "Cmd+Option+[";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(LA(LBKT))>;
-        };
-
-        unfold_block: unfold_block {
-            label = "Cmd+Option+]";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(LA(RBKT))>;
-        };
-
-        // Find and replace
-
-        find_replace: find_replace {
-            label = "Cmd+Option+F";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(LA(F))>;
-        };
-
-        // Go to definition
-
-        go_to_def: go_to_def {
-            label = "F12";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp F12>;
-        };
-
-        // Go to references
-
-        go_to_refs: go_to_refs {
-            label = "Shift+F12";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LS(F12)>;
-        };
-
-        // Toggle sidebar
-
-        toggle_sidebar: toggle_sidebar {
-            label = "Cmd+B";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(B)>;
-        };
-
-        // File tab switching
-
-        tab_switch: tab_switch {
-            label = "Ctrl+Tab";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(TAB)>;
-        };
-    };
-
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-
-        combo_fun {
-            if-layers = <LWR RSE>;
-            then-layer = <FUN>;
-        };
-    };
-
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-            label = "MAIN";
-            bindings = <
-&kp TAB         &kp Q  &kp W  &kp F             &kp P               &kp B          &kp J              &kp L    &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
-&sk LEFT_ALT    &studio_unlock  &kp R  &kp S             &kp T               &kp G          &kp M              &kp N    &kp E                &kp I               &kp O             &sk RIGHT_ALT
-&sk LEFT_SHIFT  &studio_unlock  &kp X  &kp C             &kp D               &kp V          &kp K              &kp H    &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl FUN
-                              &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt LWR SPACE  &lt RSE BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
-            >;
-        };
-
-        lower_layer {
-            label = "SYMBOL";
-            bindings = <
-&trans   &kp EXCLAMATION  &kp AT_SIGN      &kp HASH         &kp DOLLAR        &kp PERCENT      &kp CARET        &kp AMPERSAND      &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSLASH
-&trans   &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4   &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_7    &kp KP_NUMBER_8  &kp KP_NUMBER_9       &kp KP_NUMBER_0        &trans
-&mo BTL  &trans           &kp TILDE        &kp GRAVE        &kp LEFT_BRACKET  &kp LEFT_BRACE   &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &kp MINUS        &kp EQUAL             &kp SEMICOLON          &kp COLON
-                                           &trans           &trans            &trans           &kp BACKSPACE    &trans             &trans
-            >;
-        };
-
-        raise_layer {
-            label = "VSCODE";
-            bindings = <
-&kp ESC  &cmd_p         &cmd_palette     &select_next  &comment_line  &find_replace  &go_to_def  &go_to_refs  &kp UP_ARROW  &toggle_sidebar  &tab_switch  &trans
-&trans   &move_line_up  &move_line_down  &word_left    &word_right    &kp LG(F)      &kp HOME    &kp LEFT     &kp DOWN      &kp RIGHT        &kp END      &trans
-&trans   &fold_block    &unfold_block    &kp LG(Z)     &kp LG(LS(Z))  &kp LG(X)      &kp LG(C)   &kp LG(V)    &kp F9        &kp F5           &kp F2       &trans
-                                         &trans        &trans         &trans         &trans      &trans       &trans
-            >;
-        };
-
-        function_layer {
-            label = "FUNC";
-            bindings = <
-&trans  &kp F1        &kp F2      &kp F3   &kp F4  &kp F5   &kp F6            &kp F7            &kp F8              &kp F9             &kp F10          &trans
-&trans  &kp F11       &kp F12     &kp F13  &trans  &trans   &kp LG(LA(DOWN))  &kp LA(UP_ARROW)  &kp LA(DOWN_ARROW)  &kp LG(SPACE)      &kp LC(F10)      &trans
-&trans  &kp CAPSLOCK  &kp INSERT  &trans   &trans  &trans   &kp K_PLAY_PAUSE  &kp K_PREVIOUS    &kp K_NEXT          &kp K_VOLUME_DOWN  &kp K_VOLUME_UP  &kp PRINTSCREEN
-                                  &trans   &trans  &kp TAB  &kp BACKSPACE     &trans            &trans
-            >;
-        };
-
-        bt_layer {
-            label = "BT";
-            bindings = <
-&bootloader  &studio_unlock         &none         &none         &none         &none         &none         &none         &none         &none         &studio_unlock         &bootloader
-&bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 4  &bt BT_SEL 3  &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bt BT_CLR
-&trans       &sys_reset    &none         &none         &none         &none         &none         &none         &none         &none         &none         &sys_reset
-                                         &trans        &none         &trans        &trans        &trans        &trans
-            >;
-        };
-    };
 };
