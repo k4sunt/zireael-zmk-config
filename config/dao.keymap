@@ -31,7 +31,10 @@
 &sk { release-after-ms = <1000>; };
 
 / {
-    chosen { zmk,matrix_transform = &default_transform; };
+    chosen {
+        zmk,physical_layout = &dao_crkbd_layout;
+        // zmk,physical_layout = &dao_full_layout;
+    };
 
     // macOS optimized VSCode macros
 
@@ -217,7 +220,7 @@
         bt_layer {
             label = "BT";
             bindings = <
-&bootloader  &none         &none         &none         &none         &none         &none         &none         &none         &none         &none         &bootloader
+&bootloader  &studio_unlock         &none         &none         &none         &none         &none         &none         &none         &none         &studio_unlock         &bootloader
 &bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 4  &bt BT_SEL 3  &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bt BT_CLR
 &trans       &sys_reset    &none         &none         &none         &none         &none         &none         &none         &none         &none         &sys_reset
                                          &trans        &none         &trans        &trans        &trans        &trans
