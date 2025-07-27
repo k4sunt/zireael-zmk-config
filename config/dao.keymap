@@ -182,7 +182,7 @@
             bindings = <
 &kp TAB         &kp Q  &kp W  &kp F             &kp P               &kp B          &kp J              &kp L    &kp U                &kp Y               &kp SINGLE_QUOTE  &kp DELETE
 &sk LEFT_ALT    &studio_unlock  &kp R  &kp S             &kp T               &kp G          &kp M              &kp N    &kp E                &kp I               &kp O             &sk RIGHT_ALT
-&sk LEFT_SHIFT  &kp Z  &kp X  &kp C             &kp D               &kp V          &kp K              &kp H    &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl FUN
+&sk LEFT_SHIFT  &studio_unlock  &kp X  &kp C             &kp D               &kp V          &kp K              &kp H    &mt PAGE_DOWN COMMA  &mt PAGE_UP PERIOD  &kp SLASH         &sl FUN
                               &sk LEFT_CONTROL  &mt LEFT_GUI ENTER  &lt LWR SPACE  &lt RSE BACKSPACE  &kp TAB  &sk RIGHT_SHIFT
             >;
         };
