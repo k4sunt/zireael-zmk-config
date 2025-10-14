@@ -39,4 +39,4 @@ CONFIG_ZMK_BLE=y
 
 # Dongle specific configurations
 CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
-CONFIG_ZMK_USB_LOGGING=y
+# CONFIG_ZMK_USB_LOGGING=y  # Disabled due to dependency issues
