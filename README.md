@@ -8,6 +8,17 @@ Visual representation of the default keymap in keyboard-layout-editor: [KLE](htt
 
 This layout is heavily inspired by [this](https://github.com/aroum/Watchman-layouts)
 
+## nRF52840 USB Dongle Support
+
+This configuration now supports using an nRF52840 USB dongle as a central device for the split keyboard. The dongle acts as the master device, connecting to both keyboard halves via Bluetooth Low Energy, while providing USB connectivity to your computer.
+
+### Dongle Benefits
+
+- **Battery Life**: Both keyboard halves can now be peripherals, potentially extending battery life
+- **USB Connectivity**: Always-on USB connection through the dongle
+- **Multiple Bluetooth Profiles**: The dongle can manage up to 5 Bluetooth connections
+- **Output Switching**: Switch between USB and Bluetooth outputs using the BT layer
+
 
 ## FAQ
 
@@ -30,19 +41,39 @@ This layout is heavily inspired by [this](https://github.com/aroum/Watchman-layo
 ### How to flash the keyboard?
 
 1. Obtain `firmware.zip`
-2. Unzip `firmware.zip` - you should have `dao_left.uf2` and `dao_right.uf2` files
-3. Turn off the power for selected halve (move slider to position `OFF`)
-4. Connect selected halve to the PC via USB-C cable
-5. Press `RESET` button **twice** to enter DFU mode - you should see new USB device in your file manager
-6. Copy the corresponding firmware to the root directory of the new USB device
-7. Disconnect selected halve from the PC
-8. Repeat steps 3-7 for the other halve
+2. Unzip `firmware.zip` - you should have `dao_left.uf2`, `dao_right.uf2`, and `dao_dongle.uf2` files
+3. **Flash the dongle first** (if using dongle setup):
+   - Connect the nRF52840 dongle to your PC via USB
+   - Press the RESET button on the dongle to enter DFU mode
+   - Copy `dao_dongle.uf2` to the dongle's USB drive
+4. **Flash the keyboard halves**:
+   - Turn off the power for selected half (move slider to position `OFF`)
+   - Connect selected half to the PC via USB-C cable
+   - Press `RESET` button **twice** to enter DFU mode - you should see new USB device in your file manager
+   - Copy the corresponding firmware to the root directory of the new USB device
+   - Disconnect selected half from the PC
+   - Repeat for the other half
 
 ### How to pair halves?
 
+#### Without Dongle (Traditional Setup)
 1. Turn off the power for both halves (move slider to position `OFF`)
 2. Turn on the power for both halves (move slider to position `ON`)
 3. Press `RESET` button **once** on both halves **simultaneously**
+
+#### With Dongle Setup
+1. Turn off the power for both halves (move slider to position `OFF`)
+2. Turn on the power for both halves (move slider to position `ON`)
+3. Press `RESET` button **once** on both halves **simultaneously**
+4. The dongle will automatically discover and connect to both halves
+5. Use the BT layer on the keyboard or dongle to select and manage connections
+
+### Using the Dongle
+
+The nRF52840 dongle provides several benefits:
+- **Bluetooth Management**: The dongle can store up to 5 Bluetooth profiles
+- **Output Switching**: Use `Fn + Space` (OUT_USB) and `Fn + Backspace` (OUT_BLE) to switch between USB and Bluetooth outputs
+- **Connection Status**: The dongle's LEDs indicate connection status and activity
 
 ### Problems
 

@@ -4,14 +4,31 @@
 if BOARD_DAO_LEFT
 
 	config ZMK_KEYBOARD_NAME
-	default "Dao"
+	default "Dao Left"
+
+    # config ZMK_SPLIT_BLE_ROLE_CENTRAL  # Dongle acts as central
+	# 	default y
+
+endif # BOARD_DAO_LEFT
+
+if BOARD_DAO_RIGHT
+
+	config ZMK_KEYBOARD_NAME
+	default "Dao Right"
+
+endif # BOARD_DAO_RIGHT
+
+if BOARD_DAO_DONGLE
+
+	config ZMK_KEYBOARD_NAME
+	default "Dao Dongle"
 
     config ZMK_SPLIT_BLE_ROLE_CENTRAL
 	default y
 
-endif # BOARD_DAO_LEFT
+endif # BOARD_DAO_DONGLE
 
-if BOARD_DAO_LEFT || BOARD_DAO_RIGHT
+if BOARD_DAO_LEFT || BOARD_DAO_RIGHT || BOARD_DAO_DONGLE
 
 config BOARD
 	default "dao"
@@ -36,4 +53,4 @@ config USB_DEVICE_STACK
 
 endif # USB
 
-endif # BOARD_DAO_LEFT || BOARD_DAO_RIGHT
+endif # BOARD_DAO_LEFT || BOARD_DAO_RIGHT || BOARD_DAO_DONGLE

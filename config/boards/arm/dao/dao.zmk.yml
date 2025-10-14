@@ -12,3 +12,4 @@ outputs:
 siblings:
   - dao_left
   - dao_right
+  - dao_dongle

@@ -16,3 +16,7 @@ supported:
   - kscan
   - nvs
   - can
+siblings:
+  - dao_left
+  - dao_right
+  - dao_dongle
