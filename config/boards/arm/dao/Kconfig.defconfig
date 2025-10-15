@@ -40,8 +40,12 @@ config BT_CTLR
 
 	default BT
 
+if !BOARD_DAO_DONGLE
+
 config ZMK_BATTERY_VOLTAGE_DIVIDER
 	default y
+
+endif # !BOARD_DAO_DONGLE
 
 if USB
 
