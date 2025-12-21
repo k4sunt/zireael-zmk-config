@@ -41,11 +41,26 @@ This configuration now supports using an nRF52840 USB dongle as a central device
 ### How to flash the keyboard?
 
 1. Obtain `firmware.zip`
-2. Unzip `firmware.zip` - you should have `dao_left.uf2`, `dao_right.uf2`, and `dao_dongle.uf2` files
+2. Unzip `firmware.zip` - you should have `dao_left.uf2`, `dao_right.uf2`, and `dao_dongle.hex` files
 3. **Flash the dongle first** (if using dongle setup):
-   - Connect the nRF52840 dongle to your PC via USB
-   - Press the RESET button on the dongle to enter DFU mode
-   - Copy `dao_dongle.uf2` to the dongle's USB drive
+   - The dongle uses Nordic DFU bootloader (not UF2)
+   - Generate DFU package from the hex file:
+     ```bash
+     # Install nrfutil if not already installed
+     pip install nrfutil
+     
+     # Generate DFU package
+     ./generate-dfu.sh <path-to-dao_dongle.hex> dao_dongle_dfu.zip
+     ```
+   - Put the dongle in DFU mode:
+     - Press and hold the button on the dongle
+     - While holding, plug in the USB cable
+     - Release the button
+   - Flash using nrfutil:
+     ```bash
+     nrfutil dfu usb-serial -pkg dao_dongle_dfu.zip -p <serial-port>
+     ```
+     Or use the nRF Connect Desktop app to flash the DFU package
 4. **Flash the keyboard halves**:
    - Turn off the power for selected half (move slider to position `OFF`)
    - Connect selected half to the PC via USB-C cable
