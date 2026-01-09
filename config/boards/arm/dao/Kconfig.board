@@ -1,0 +1,7 @@
+# Dao board configuration
+#
+# Copyright (c) 2021 Rafael Yumagulov
+# SPDX-License-Identifier: MIT
+
+source "Kconfig.dao"
+
