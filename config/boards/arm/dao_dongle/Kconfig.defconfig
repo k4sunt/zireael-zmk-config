@@ -1,0 +1,32 @@
+# Copyright (c) 2021 Rafael Yumagulov
+# SPDX-License-Identifier: MIT
+
+if BOARD_DAO_DONGLE
+
+config BOARD
+	default "dao_dongle"
+
+config ZMK_KEYBOARD_NAME
+	default "Dao Dongle"
+
+config ZMK_SPLIT
+	default y
+
+config ZMK_SPLIT_BLE_ROLE_CENTRAL
+	default y
+
+config BT_CTLR
+	default BT
+
+if USB
+
+config USB_NRFX
+	default y
+
+config USB_DEVICE_STACK
+	default y
+
+endif # USB
+
+endif # BOARD_DAO_DONGLE
+
