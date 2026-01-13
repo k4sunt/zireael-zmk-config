@@ -33,3 +33,6 @@ CONFIG_ZMK_BLE=y
 
 # Dongle specific configurations
 CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
+
+# Dongle has no local keys (keymap on peripherals only)
+CONFIG_ZMK_SPLIT_PERIPHERAL_HID_INDICATORS=n
