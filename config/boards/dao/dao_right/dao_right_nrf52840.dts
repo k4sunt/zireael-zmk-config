@@ -4,7 +4,15 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include "dao.dtsi"
+#include "../dao.dtsi"
+
+&default_transform {
+	col-offset = <6>;
+};
+
+&extra_keys_transform {
+	col-offset = <6>;
+};
 
 &kscan0 {
 	col-gpios
