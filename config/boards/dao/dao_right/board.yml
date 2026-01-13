@@ -3,5 +3,3 @@ board:
   vendor: dao
   socs:
     - name: nrf52840
-      variants:
-        - name: qiaa
