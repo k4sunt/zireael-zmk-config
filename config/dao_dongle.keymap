@@ -1,0 +1,11 @@
+/*
+ * Copyright (c) 2021 Rafael Yumagulov
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+// Dongle keymap - includes the main Dao keymap
+// The dongle has no physical keys but needs the keymap definition
+// to properly handle events from the peripheral splits
+
+#include "dao.keymap"
