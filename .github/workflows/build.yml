@@ -17,19 +17,52 @@ jobs:
         run: |
           pip3 install nrfutil
 
+      - name: List downloaded artifacts
+        run: |
+          echo "=== All files in current directory ==="
+          ls -la
+          echo ""
+          echo "=== Searching for dongle files ==="
+          find . -name "*dongle*" -type f
+          echo ""
+          echo "=== All .hex files ==="
+          find . -name "*.hex" -type f
+          echo ""
+          echo "=== All firmware files ==="
+          find . -name "*.uf2" -o -name "*.hex" -o -name "*.bin" | sort
+
       - name: Create Nordic DFU package for dongle
         run: |
-          if [ -f "dao_dongle.hex" ]; then
+          # Try to find the dongle hex file with various possible names
+          HEX_FILE=""
+          for pattern in "dao_dongle*.hex" "*dongle*.hex" "dao_dongle.bin"; do
+            found=$(find . -name "$pattern" -type f | head -1)
+            if [ -n "$found" ]; then
+              HEX_FILE="$found"
+              break
+            fi
+          done
+
+          if [ -n "$HEX_FILE" ]; then
+            echo "Found firmware file: $HEX_FILE"
+
+            # If it's a .bin file, we need .hex for DFU
+            if [[ "$HEX_FILE" == *.bin ]]; then
+              echo "ERROR: Found .bin file instead of .hex"
+              echo "The dongle defconfig is not producing .hex output"
+              exit 1
+            fi
+
             nrfutil pkg generate \
               --hw-version 52 \
               --sd-req 0x00,0xB6 \
               --application-version 1 \
-              --application dao_dongle.hex \
+              --application "$HEX_FILE" \
               dao_dongle-zmk_dfu.zip
-            echo "Created DFU package: dao_dongle-zmk_dfu.zip"
+            echo "✅ Created DFU package: dao_dongle-zmk_dfu.zip"
           else
-            echo "Error: dao_dongle.hex not found"
-            ls -la
+            echo "❌ ERROR: No dongle firmware file found"
+            echo "This likely means the dongle build failed or didn't run"
             exit 1
           fi
 
