@@ -2,3 +2,4 @@ include:
   - board: dao_left
   - board: dao_right
   - board: dao_dongle
+    artifact-name: dao_dongle
