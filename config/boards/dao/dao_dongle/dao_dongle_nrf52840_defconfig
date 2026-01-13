@@ -18,10 +18,10 @@ CONFIG_FLASH=y
 CONFIG_FLASH_PAGE_LAYOUT=y
 CONFIG_FLASH_MAP=y
 
-# Disable UF2 for dongle (Nordic bootloader requires DFU package)
-# CONFIG_BUILD_OUTPUT_UF2 is not set
-
-# Enable HEX output for Nordic DFU, disable BIN
+# Enable both UF2 and HEX output for dongle
+# UF2 ensures artifact is packaged by ZMK workflow
+# HEX is needed for Nordic DFU package creation
+CONFIG_BUILD_OUTPUT_UF2=y
 CONFIG_BUILD_OUTPUT_HEX=y
 # CONFIG_BUILD_OUTPUT_BIN is not set
 
