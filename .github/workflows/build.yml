@@ -13,58 +13,86 @@ jobs:
         with:
           name: firmware
 
-      - name: Install nrfutil
+      - name: Install tools
         run: |
-          pip3 install nrfutil
+          pip3 install nrfutil intelhex
 
       - name: List downloaded artifacts
         run: |
-          echo "=== All files in current directory ==="
+          echo "=== All files in artifact ==="
           ls -la
           echo ""
-          echo "=== Searching for dongle files ==="
-          find . -name "*dongle*" -type f
-          echo ""
-          echo "=== All .hex files ==="
-          find . -name "*.hex" -type f
-          echo ""
-          echo "=== All firmware files ==="
-          find . -name "*.uf2" -o -name "*.hex" -o -name "*.bin" | sort
+          echo "=== All .uf2 files ==="
+          ls -la *.uf2
 
-      - name: Create Nordic DFU package for dongle
+      - name: Convert UF2 to HEX for dongle
         run: |
-          # Try to find the dongle hex file with various possible names
-          HEX_FILE=""
-          for pattern in "dao_dongle*.hex" "*dongle*.hex" "dao_dongle.bin"; do
-            found=$(find . -name "$pattern" -type f | head -1)
-            if [ -n "$found" ]; then
-              HEX_FILE="$found"
-              break
-            fi
-          done
+          # Find the dongle UF2 file
+          UF2_FILE=$(ls dao_dongle*.uf2 dao_dongle-*.uf2 2>/dev/null | head -1)
 
-          if [ -n "$HEX_FILE" ]; then
-            echo "Found firmware file: $HEX_FILE"
-
-            # If it's a .bin file, we need .hex for DFU
-            if [[ "$HEX_FILE" == *.bin ]]; then
-              echo "ERROR: Found .bin file instead of .hex"
-              echo "The dongle defconfig is not producing .hex output"
-              exit 1
-            fi
-
-            nrfutil pkg generate \
-              --hw-version 52 \
-              --sd-req 0x00,0xB6 \
-              --application-version 1 \
-              --application "$HEX_FILE" \
-              dao_dongle-zmk_dfu.zip
-            echo "✅ Created DFU package: dao_dongle-zmk_dfu.zip"
-          else
-            echo "❌ ERROR: No dongle firmware file found"
-            echo "This likely means the dongle build failed or didn't run"
+          if [ -z "$UF2_FILE" ]; then
+            echo "❌ ERROR: dao_dongle UF2 file not found"
+            ls -la
             exit 1
           fi
+
+          echo "Found dongle UF2: $UF2_FILE"
+
+          # Convert UF2 to HEX
+          # UF2 files contain binary data at specific addresses
+          # We'll extract it using a Python script
+          python3 << 'PYEOF'
+import struct
+import sys
+from intelhex import IntelHex
+
+# Read UF2 file
+uf2_file = "${UF2_FILE}"
+print(f"Converting {uf2_file} to HEX...")
+
+ih = IntelHex()
+
+with open(uf2_file, 'rb') as f:
+    while True:
+        block = f.read(512)
+        if len(block) < 512:
+            break
+
+        # Parse UF2 block
+        magic_start = struct.unpack('<I', block[0:4])[0]
+        if magic_start != 0x0A324655:  # UF2 magic
+            continue
+
+        target_addr = struct.unpack('<I', block[12:16])[0]
+        payload_size = struct.unpack('<I', block[16:20])[0]
+        payload = block[32:32+payload_size]
+
+        # Add to Intel HEX
+        for i, byte in enumerate(payload):
+            ih[target_addr + i] = byte
+
+# Write HEX file
+hex_file = uf2_file.replace('.uf2', '.hex')
+ih.write_hex_file(hex_file)
+print(f"✅ Created HEX file: {hex_file}")
+PYEOF
+
+          HEX_FILE="${UF2_FILE%.uf2}.hex"
+          echo "HEX_FILE=$HEX_FILE" >> $GITHUB_ENV
+
+      - name: Create Nordic DFU package
+        run: |
+          echo "Creating DFU package from: $HEX_FILE"
+
+          nrfutil pkg generate \
+            --hw-version 52 \
+            --sd-req 0x00,0xB6 \
+            --application-version 1 \
+            --application "$HEX_FILE" \
+            dao_dongle-zmk_dfu.zip
+
+          echo "✅ Created DFU package: dao_dongle-zmk_dfu.zip"
+          ls -lh dao_dongle-zmk_dfu.zip
 
       - name: Upload DFU package
         uses: actions/upload-artifact@v4
