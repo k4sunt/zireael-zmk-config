@@ -18,11 +18,8 @@ CONFIG_FLASH=y
 CONFIG_FLASH_PAGE_LAYOUT=y
 CONFIG_FLASH_MAP=y
 
-# Enable ONLY UF2 output to match dao_left and dao_right
-# The workflow will convert UF2 to HEX for DFU packaging
+# Turn on uf2 build
 CONFIG_BUILD_OUTPUT_UF2=y
-# CONFIG_BUILD_OUTPUT_HEX is not set
-# CONFIG_BUILD_OUTPUT_BIN is not set
 
 # Increase transmit power level
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
@@ -30,8 +27,5 @@ CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 CONFIG_ZMK_USB=y
 CONFIG_ZMK_BLE=y
 
-# Dongle specific configurations
+# Dongle is central in dongle-centric split
 CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
-
-# Dongle has no local keys (keymap on peripherals only)
-CONFIG_ZMK_SPLIT_PERIPHERAL_HID_INDICATORS=n
