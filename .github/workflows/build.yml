@@ -11,21 +11,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download firmware artifacts
+      - name: Download ALL artifacts to debug
         uses: actions/download-artifact@v4
         with:
-          name: firmware
+          path: all-artifacts
 
       - name: Install tools
         run: |
           pip3 install nrfutil intelhex
 
-      - name: List downloaded artifacts
+      - name: List ALL downloaded artifacts
         run: |
-          echo "=== All files in artifact ==="
-          ls -la
+          echo "=== All artifacts downloaded ==="
+          ls -la all-artifacts/
           echo ""
-          echo "=== All .uf2 files ==="
+          echo "=== Contents of each artifact ==="
+          for dir in all-artifacts/*/; do
+            echo ">>> Artifact: $(basename $dir)"
+            ls -la "$dir"
+            echo ""
+          done
+          echo "=== Searching for dongle files ==="
+          find all-artifacts -name "*dongle*" -type f
+          echo ""
+          echo "=== All UF2 files ==="
+          find all-artifacts -name "*.uf2" -type f
+
+      - name: Copy firmware files to working directory
+        run: |
+          # Copy all firmware files to current directory for processing
+          find all-artifacts -name "*.uf2" -exec cp {} . \;
+          echo "=== UF2 files in working directory ==="
           ls -la *.uf2
 
       - name: Convert UF2 to HEX for dongle
