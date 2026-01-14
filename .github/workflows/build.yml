@@ -18,7 +18,9 @@ jobs:
 
       - name: Install tools
         run: |
-          pip3 install nrfutil intelhex
+          # Install newer nrfutil-device instead of legacy nrfutil
+          pip3 install intelhex adafruit-nrfutil
+          # adafruit-nrfutil is a Python 3 compatible fork
 
       - name: List ALL downloaded artifacts
         run: |
@@ -67,10 +69,8 @@ jobs:
         run: |
           echo "Creating DFU package from: $HEX_FILE"
 
-          nrfutil pkg generate \
-            --hw-version 52 \
-            --sd-req 0x00,0xB6 \
-            --application-version 1 \
+          adafruit-nrfutil dfu genpkg \
+            --dev-type 0x0052 \
             --application "$HEX_FILE" \
             dao_dongle-zmk_dfu.zip
 
