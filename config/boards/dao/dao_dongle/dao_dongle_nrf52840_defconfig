@@ -18,11 +18,10 @@ CONFIG_FLASH=y
 CONFIG_FLASH_PAGE_LAYOUT=y
 CONFIG_FLASH_MAP=y
 
-# Enable both UF2 and HEX output for dongle
-# UF2 ensures artifact is packaged by ZMK workflow
-# HEX is needed for Nordic DFU package creation
+# Enable ONLY UF2 output to match dao_left and dao_right
+# The workflow will convert UF2 to HEX for DFU packaging
 CONFIG_BUILD_OUTPUT_UF2=y
-CONFIG_BUILD_OUTPUT_HEX=y
+# CONFIG_BUILD_OUTPUT_HEX is not set
 # CONFIG_BUILD_OUTPUT_BIN is not set
 
 # Increase transmit power level
