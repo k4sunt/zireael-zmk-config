@@ -108,13 +108,13 @@
 		};
 
 		/* Nordic bootloader settings */
-		bootloader_settings: partition@fe000 {
+		bootloader_settings_partition: partition@fe000 {
 			label = "bootloader_settings";
 			reg = <0x000fe000 0x00001000>;
 		};
 
 		/* Nordic DFU bootloader */
-		bootloader: partition@ff000 {
+		bootloader_partition: partition@ff000 {
 			label = "bootloader";
 			reg = <0x000ff000 0x00001000>;
 		};
