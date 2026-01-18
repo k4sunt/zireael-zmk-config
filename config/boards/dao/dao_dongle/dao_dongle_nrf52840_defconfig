@@ -18,8 +18,9 @@ CONFIG_FLASH=y
 CONFIG_FLASH_PAGE_LAYOUT=y
 CONFIG_FLASH_MAP=y
 
-# Turn on uf2 build
-CONFIG_BUILD_OUTPUT_UF2=y
+# Output HEX for Nordic Open Bootloader DFU
+# Note: UF2 is for Adafruit bootloader, we need HEX for Nordic
+CONFIG_BUILD_OUTPUT_HEX=y
 
 # Increase transmit power level
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y

@@ -18,9 +18,7 @@ jobs:
 
       - name: Install tools
         run: |
-          # Install newer nrfutil-device instead of legacy nrfutil
-          pip3 install intelhex adafruit-nrfutil
-          # adafruit-nrfutil is a Python 3 compatible fork
+          pip3 install adafruit-nrfutil
 
       - name: List ALL downloaded artifacts
         run: |
@@ -35,35 +33,25 @@ jobs:
           done
           echo "=== Searching for dongle files ==="
           find all-artifacts -name "*dongle*" -type f
-          echo ""
-          echo "=== All UF2 files ==="
-          find all-artifacts -name "*.uf2" -type f
 
-      - name: Copy firmware files to working directory
+      - name: Copy dongle HEX file
         run: |
-          # Copy all firmware files to current directory for processing
-          find all-artifacts -name "*.uf2" -exec cp {} . \;
-          echo "=== UF2 files in working directory ==="
-          ls -la *.uf2
+          # Dongle now outputs HEX directly (CONFIG_BUILD_OUTPUT_HEX=y)
+          # UF2 files are for keyboards with Adafruit bootloader
+          HEX_FILE=$(find all-artifacts -name "dao_dongle*.hex" -o -name "dao_dongle-*.hex" | head -1)
 
-      - name: Convert UF2 to HEX for dongle
-        run: |
-          # Find the dongle UF2 file
-          UF2_FILE=$(ls dao_dongle*.uf2 dao_dongle-*.uf2 2>/dev/null | head -1)
-
-          if [ -z "$UF2_FILE" ]; then
-            echo "❌ ERROR: dao_dongle UF2 file not found"
-            ls -la
+          if [ -z "$HEX_FILE" ]; then
+            echo "❌ ERROR: dao_dongle HEX file not found"
+            echo "Available files:"
+            find all-artifacts -type f
             exit 1
           fi
 
-          echo "Found dongle UF2: $UF2_FILE"
-
-          # Convert using our Python script
-          python3 .github/scripts/uf2_to_hex.py "$UF2_FILE"
-
-          HEX_FILE="${UF2_FILE%.uf2}.hex"
-          echo "HEX_FILE=$HEX_FILE" >> $GITHUB_ENV
+          echo "Found dongle HEX: $HEX_FILE"
+          cp "$HEX_FILE" .
+          HEX_FILENAME=$(basename "$HEX_FILE")
+          echo "HEX_FILE=$HEX_FILENAME" >> $GITHUB_ENV
+          ls -lh "$HEX_FILENAME"
 
       - name: Create Nordic DFU package
         run: |
