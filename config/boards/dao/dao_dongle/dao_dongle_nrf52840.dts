@@ -79,10 +79,9 @@
 		#size-cells = <1>;
 
 		/*
-		 * Nordic DFU bootloader partition layout
-		 * Bootloader at end of flash (0xFE000-0x100000)
-		 * MBR params at 0xFE000
-		 * Bootloader at 0xFF000
+		 * Nordic Open Bootloader partition layout
+		 * Open Bootloader occupies 0xE0000-0x100000 (128KB)
+		 * Reference: https://infocenter.nordicsemi.com/topic/sdk_nrf5_v17.0.2/lib_bootloader.html
 		 */
 
 		boot_partition: partition@0 {
@@ -95,28 +94,22 @@
 		};
 		code_partition: partition@27000 {
 			label = "code_partition";
-			reg = <0x00027000 0x000c5000>;
+			reg = <0x00027000 0x000b1000>;
 		};
 
 		/*
 		 * Storage partition will be used by FCB/LittleFS/NVS
 		 * if enabled.
 		 */
-		storage_partition: partition@ec000 {
+		storage_partition: partition@d8000 {
 			label = "storage";
-			reg = <0x000ec000 0x00012000>;
+			reg = <0x000d8000 0x00008000>;
 		};
 
-		/* Nordic bootloader settings */
-		bootloader_settings_partition: partition@fe000 {
-			label = "bootloader_settings";
-			reg = <0x000fe000 0x00001000>;
-		};
-
-		/* Nordic DFU bootloader */
-		bootloader_partition: partition@ff000 {
+		/* Nordic Open Bootloader - 128KB at end of flash */
+		bootloader_partition: partition@e0000 {
 			label = "bootloader";
-			reg = <0x000ff000 0x00001000>;
+			reg = <0x000e0000 0x00020000>;
 		};
 	};
 };
