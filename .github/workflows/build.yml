@@ -34,32 +34,37 @@ jobs:
           echo "=== Searching for dongle files ==="
           find all-artifacts -name "*dongle*" -type f
 
-      - name: Copy dongle HEX file
+      - name: Copy dongle firmware file
         run: |
-          # Dongle now outputs HEX directly (CONFIG_BUILD_OUTPUT_HEX=y)
-          # UF2 files are for keyboards with Adafruit bootloader
-          HEX_FILE=$(find all-artifacts -name "dao_dongle*.hex" -o -name "dao_dongle-*.hex" | head -1)
+          # Try to find HEX file first (preferred), fallback to BIN
+          FIRMWARE_FILE=$(find all-artifacts -name "dao_dongle*.hex" -o -name "dao_dongle-*.hex" | head -1)
 
-          if [ -z "$HEX_FILE" ]; then
-            echo "❌ ERROR: dao_dongle HEX file not found"
+          if [ -z "$FIRMWARE_FILE" ]; then
+            echo "HEX not found, looking for BIN file..."
+            FIRMWARE_FILE=$(find all-artifacts -name "dao_dongle*.bin" -o -name "dao_dongle-*.bin" | head -1)
+          fi
+
+          if [ -z "$FIRMWARE_FILE" ]; then
+            echo "❌ ERROR: dao_dongle firmware file (HEX or BIN) not found"
             echo "Available files:"
             find all-artifacts -type f
             exit 1
           fi
 
-          echo "Found dongle HEX: $HEX_FILE"
-          cp "$HEX_FILE" .
-          HEX_FILENAME=$(basename "$HEX_FILE")
-          echo "HEX_FILE=$HEX_FILENAME" >> $GITHUB_ENV
-          ls -lh "$HEX_FILENAME"
+          echo "Found dongle firmware: $FIRMWARE_FILE"
+          cp "$FIRMWARE_FILE" .
+          FIRMWARE_FILENAME=$(basename "$FIRMWARE_FILE")
+          echo "FIRMWARE_FILE=$FIRMWARE_FILENAME" >> $GITHUB_ENV
+          ls -lh "$FIRMWARE_FILENAME"
 
       - name: Create Nordic DFU package
         run: |
-          echo "Creating DFU package from: $HEX_FILE"
+          echo "Creating DFU package from: $FIRMWARE_FILE"
 
+          # adafruit-nrfutil accepts both HEX and BIN files
           adafruit-nrfutil dfu genpkg \
             --dev-type 0x0052 \
-            --application "$HEX_FILE" \
+            --application "$FIRMWARE_FILE" \
             dao_dongle-zmk_dfu.zip
 
           echo "✅ Created DFU package: dao_dongle-zmk_dfu.zip"
