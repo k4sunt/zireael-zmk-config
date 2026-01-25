@@ -13,7 +13,7 @@
 	compatible = "dao,dongle";
 
 	aliases {
-        zephyr_udc0 = &usbd;
+        zephyr-udc0 = &usbd;
     };
 
 	chosen {
