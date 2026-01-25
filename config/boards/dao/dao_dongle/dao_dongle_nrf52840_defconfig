@@ -27,7 +27,25 @@ CONFIG_BUILD_OUTPUT_UF2=n
 # Increase transmit power level
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 
+# USB Configuration (required for USB enumeration)
+CONFIG_USB=y
+CONFIG_USB_DEVICE_STACK=y
+CONFIG_USB_HID=y
 CONFIG_ZMK_USB=y
+
+# Nordic USB driver
+CONFIG_USB_NRFX=y
+CONFIG_USB_NRFX_VBUS_DETECT=y
+
+# Clock configuration (required for USB)
+CONFIG_CLOCK_CONTROL_NRF_K32SRC_XTAL=y
+
+# USB Device IDs
+CONFIG_USB_DEVICE_VID=0x1915
+CONFIG_USB_DEVICE_PID=0x521F
+CONFIG_USB_DEVICE_MANUFACTURER="Raytac"
+CONFIG_USB_DEVICE_PRODUCT="DAO ZMK Dongle"
+
 CONFIG_ZMK_BLE=y
 
 # Dongle is central in dongle-centric split
