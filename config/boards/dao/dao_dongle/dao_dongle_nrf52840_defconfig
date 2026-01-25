@@ -30,10 +30,5 @@ CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 CONFIG_ZMK_USB=y
 CONFIG_ZMK_BLE=y
 
-# Explicit USB configuration for Raytac MDBT50Q-CX
-CONFIG_USB=y
-CONFIG_USB_DEVICE_STACK=y
-CONFIG_USB_HID=y
-
 # Dongle is central in dongle-centric split
 CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
