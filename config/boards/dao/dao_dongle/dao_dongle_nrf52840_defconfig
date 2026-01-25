@@ -27,17 +27,23 @@ CONFIG_BUILD_OUTPUT_UF2=n
 # Increase transmit power level
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 
-# USB Configuration (required for USB enumeration)
-CONFIG_USB=y
+# Enable USB device support (Zephyr 4.x correct symbols)
 CONFIG_USB_DEVICE_STACK=y
-CONFIG_USB_HID=y
+CONFIG_USB_DEVICE_INITIALIZE_AT_BOOT=y
+CONFIG_USB_COMPOSITE_DEVICE=y
+
+# Enable HID class
+CONFIG_USB_DEVICE_HID=y
+CONFIG_USB_HID_BOOT_PROTOCOL=y
+
+# ZMK USB glue
 CONFIG_ZMK_USB=y
 
-# Nordic USB driver
-CONFIG_USB_NRFX=y
-CONFIG_USB_NRFX_VBUS_DETECT=y
+# Enable Nordic USB device driver
+CONFIG_USB_DEVICE_DRIVER_NRFX=y
+CONFIG_NRF_USBD=y
 
-# Clock configuration (required for USB)
+# Clock source (required for USB)
 CONFIG_CLOCK_CONTROL_NRF_K32SRC_XTAL=y
 
 # USB Device IDs
