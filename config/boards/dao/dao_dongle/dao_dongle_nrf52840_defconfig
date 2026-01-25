@@ -27,15 +27,17 @@ CONFIG_BUILD_OUTPUT_UF2=n
 # Increase transmit power level
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 
-
 # Enable USB device stack (ZMK-controlled)
 CONFIG_USB_DEVICE_STACK=y
 
-# Enable HID device support
-CONFIG_USB_DEVICE_HID=y
-
 # ZMK USB glue (this is what actually matters)
 CONFIG_ZMK_USB=y
+
+# Expose HID over USB
+CONFIG_ZMK_USB_HID=y
+
+# Enable HID device support
+CONFIG_USB_DEVICE_HID=y
 
 # Clock source required for USB on nRF52840
 CONFIG_CLOCK_CONTROL_NRF_K32SRC_XTAL=y
