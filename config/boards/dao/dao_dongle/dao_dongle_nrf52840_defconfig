@@ -1,15 +1,16 @@
 # SPDX-License-Identifier: MIT
 
+# --- ZMK core ---
 CONFIG_ZMK_SPLIT=y
+CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
+CONFIG_ZMK_DONGLE=y
 CONFIG_ZMK_SLEEP=y
 
-# Enable MPU
+# --- MPU / GPIO ---
 CONFIG_ARM_MPU=y
-
-# enable GPIO
 CONFIG_GPIO=y
 
-# Enable writing to flash
+# --- Flash / settings ---
 CONFIG_USE_DT_CODE_PARTITION=y
 CONFIG_MPU_ALLOW_FLASH_WRITE=y
 CONFIG_NVS=y
@@ -18,37 +19,25 @@ CONFIG_FLASH=y
 CONFIG_FLASH_PAGE_LAYOUT=y
 CONFIG_FLASH_MAP=y
 
-# Output BIN for Nordic Open Bootloader DFU
-# BIN format works with adafruit-nrfutil for DFU packaging
+# --- Build outputs (Nordic Open Bootloader DFU) ---
 CONFIG_BUILD_OUTPUT_BIN=y
 CONFIG_BUILD_OUTPUT_HEX=n
 CONFIG_BUILD_OUTPUT_UF2=n
 
-# Increase transmit power level
+# --- Bluetooth ---
+CONFIG_ZMK_BLE=y
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 
-# Enable USB device stack (ZMK-controlled)
-CONFIG_USB_DEVICE_STACK=y
-
-# ZMK USB glue (this is what actually matters)
+# --- USB (ZMK-controlled) ---
 CONFIG_ZMK_USB=y
-
-# Expose HID over USB
-CONFIG_ZMK_USB_HID=y
-
-# Enable HID device support
+CONFIG_USB_DEVICE_STACK=y
 CONFIG_USB_DEVICE_HID=y
 
-# Clock source required for USB on nRF52840
+# Required clock source for nRF52840 USB
 CONFIG_CLOCK_CONTROL_NRF_K32SRC_XTAL=y
 
-# USB Device IDs
+# USB identity
 CONFIG_USB_DEVICE_VID=0x1915
 CONFIG_USB_DEVICE_PID=0x521F
 CONFIG_USB_DEVICE_MANUFACTURER="Raytac"
 CONFIG_USB_DEVICE_PRODUCT="DAO ZMK Dongle"
-
-CONFIG_ZMK_BLE=y
-
-# Dongle is central in dongle-centric split
-CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
