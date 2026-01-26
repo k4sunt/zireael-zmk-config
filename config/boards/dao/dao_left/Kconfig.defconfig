@@ -3,14 +3,26 @@
 
 if BOARD_DAO_LEFT
 
-config ZMK_KEYBOARD_NAME
-	default "Dao"
+config SOC
+	default "nrf52840_qiaa"
 
-config ZMK_SPLIT_BLE_ROLE_CENTRAL
+config SOC_SERIES
+	default "nrf52x"
+
+config ARM
+	default y
+
+config CPU_CORTEX_M4
 	default y
 
 config BOARD
 	default "dao_left"
+
+config ZMK_KEYBOARD_NAME
+	default "Dao Left"
+
+config ZMK_SPLIT_BLE_ROLE_CENTRAL
+	default y
 
 config ZMK_SPLIT
 	default y

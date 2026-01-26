@@ -3,8 +3,23 @@
 
 if BOARD_DAO_RIGHT
 
+config SOC
+	default "nrf52840_qiaa"
+
+config SOC_SERIES
+	default "nrf52x"
+
+config ARM
+	default y
+
+config CPU_CORTEX_M4
+	default y
+
 config BOARD
 	default "dao_right"
+
+config ZMK_KEYBOARD_NAME
+	default "Dao Right"
 
 config ZMK_SPLIT
 	default y
