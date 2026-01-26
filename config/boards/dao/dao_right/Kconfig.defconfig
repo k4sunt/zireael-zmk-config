@@ -15,11 +15,4 @@ config BT_CTLR
 config ZMK_BATTERY_VOLTAGE_DIVIDER
 	default y
 
-if USB_DEVICE_STACK
-
-config USB_DEVICE_DRIVER_NRFX
-	default y
-
-endif # USB_DEVICE_STACK
-
 endif # BOARD_DAO_RIGHT
