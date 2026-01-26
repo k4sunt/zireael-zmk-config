@@ -72,6 +72,14 @@
 	status = "okay";
 };
 
+&radio {
+    status = "okay";
+};
+
+blue_led: led_0 {
+    gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+};
+
 &flash0 {
 	/*
 	 * For more information, see:
