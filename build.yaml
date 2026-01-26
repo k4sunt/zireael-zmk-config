@@ -1,3 +1,5 @@
 include:
   - board: dao_left
+    cmake-args: -DBOARD_ROOT=config
   - board: dao_right
+    cmake-args: -DBOARD_ROOT=config
