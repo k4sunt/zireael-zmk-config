@@ -1,0 +1,16 @@
+# macOS resource forks and metadata
+._*
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ZMK build artifacts
+build/
+.west/
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

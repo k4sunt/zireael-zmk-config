@@ -1,12 +1,6 @@
-# Dao board configuration
-
 # Copyright (c) 2021 Rafael Yumagulov
 # SPDX-License-Identifier: MIT
 
-config BOARD_DAO_LEFT
-	bool "dao_left"
-	depends on SOC_NRF52840_QIAA
-
 config BOARD_DAO_RIGHT
-	bool "dao_right"
+	bool "Dao Right"
 	depends on SOC_NRF52840_QIAA
