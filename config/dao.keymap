@@ -278,7 +278,7 @@
 // ╭────────┬──────────────┬─────────────────┬─────────────┬──────────────┬──────────────╮   ╭────────────┬────────────┬──────┬─────────────────┬─────────────┬────────╮
     &kp ESC  &cmd_p         &cmd_palette      &select_next  &comment_line  &find_replace      &go_to_def   &go_to_refs  &kp UP &toggle_sidebar   &tab_switch   &trans
 // ├────────┼──────────────┼─────────────────┼─────────────┼──────────────┼──────────────┤   ├────────────┼────────────┼──────┼─────────────────┼─────────────┼────────┤
-    &trans   &move_line_up  &move_line_down   &word_left    &word_right    &kp LG(F)          &kp HOME     &kp LEFT     &kp DN &kp RIGHT         &kp END       &trans
+    &trans   &move_line_up  &move_line_down   &word_left    &word_right    &kp LG(F)          &kp HOME     &kp LEFT     &kp DOWN &kp RIGHT         &kp END       &trans
 // ├────────┼──────────────┼─────────────────┼─────────────┼──────────────┼──────────────┤   ├────────────┼────────────┼──────┼─────────────────┼─────────────┼────────┤
     &trans   &fold_block    &unfold_block     &kp LG(Z)     &kp LG(LS(Z))  &kp LG(X)          &kp LG(C)    &kp LG(V)    &kp F9 &kp F5            &kp F2        &trans
 // ╰────────┴──────────────┴─────────────────┼─────────────┼──────────────┼──────────────┤   ├────────────┼────────────┼──────┼─────────────────┴─────────────┴────────╯
