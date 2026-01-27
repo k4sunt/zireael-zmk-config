@@ -6,9 +6,6 @@ if BOARD_DAO_RIGHT
 config SOC
 	default "nrf52840_qiaa"
 
-config SOC_SERIES
-	default "nrf52x"
-
 config ARM
 	default y
 
