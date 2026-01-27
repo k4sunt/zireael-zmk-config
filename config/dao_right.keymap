@@ -1,0 +1,8 @@
+/*
+ * Board-specific keymap entrypoint for dao_right.
+ *
+ * ZMK looks for a board-specific keymap; we include the shared dao.keymap.
+ */
+
+#include "dao.keymap"
+
