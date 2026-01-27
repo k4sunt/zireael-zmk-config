@@ -30,4 +30,7 @@ config BT_CTLR
 config ZMK_BATTERY_VOLTAGE_DIVIDER
 	default y
 
+config BUILD_OUTPUT_UF2
+	default y
+
 endif # BOARD_DAO_LEFT
