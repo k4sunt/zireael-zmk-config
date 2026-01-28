@@ -84,7 +84,7 @@
         // BTL layer access (both thumb outer keys)
         combo_btl {
             timeout-ms = <50>;
-            key-positions = <39 44>;
+            key-positions = <36 41>;
             bindings = <&mo BTL>;
             layers = <DEF LWR RSE>;
         };
