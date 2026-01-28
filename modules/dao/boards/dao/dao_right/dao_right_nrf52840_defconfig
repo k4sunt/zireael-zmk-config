@@ -3,8 +3,8 @@
 CONFIG_BOARD_DAO_RIGHT=y
 
 # Split keyboard configuration - RIGHT PERIPHERAL
+# Peripheral role is default when ZMK_SPLIT=y and not central
 CONFIG_ZMK_SPLIT=y
-CONFIG_ZMK_SPLIT_ROLE_PERIPHERAL=y
 CONFIG_ZMK_SLEEP=y
 
 # Enable MPU
