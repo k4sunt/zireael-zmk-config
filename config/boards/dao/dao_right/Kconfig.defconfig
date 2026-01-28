@@ -12,6 +12,9 @@ config SOC
 config ARM
 	default y
 
+config CPU_CORTEX_M4
+	default y
+
 config ZMK_KEYBOARD_NAME
 	default "Dao Right"
 
