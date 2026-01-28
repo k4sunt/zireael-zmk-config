@@ -3,15 +3,6 @@
 
 if BOARD_DAO_RIGHT
 
-config SOC
-	default "nrf52840_qiaa"
-
-config ARM
-	default y
-
-config CPU_CORTEX_M4
-	default y
-
 config BOARD
 	default "dao_right"
 
