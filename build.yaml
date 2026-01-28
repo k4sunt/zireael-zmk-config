@@ -1,5 +1,5 @@
 include:
-  - board: dao_left@nrf52840_qiaa
+  - board: dao_left
     cmake-args: -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/modules/dao"
-  - board: dao_right@nrf52840_qiaa
+  - board: dao_right
     cmake-args: -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/modules/dao"
