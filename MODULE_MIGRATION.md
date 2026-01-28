@@ -131,21 +131,22 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: dao                    # ← Added module reference
-      path: modules/dao             # ← Points to module directory
   self:
     path: config
+    west-commands: scripts/west-commands.yml
+    import:
+      - ../modules/dao/zephyr/module.yml  # ← Import in-repo module
 ```
 
-This is **critical** - West needs to know about the module to load it during the build.
+This is **critical** - West needs to import the in-repo module to load it during the build. Note: In-repo modules use `self.import`, not `projects` (which is for external repos with URLs).
 
 ---
 
 ## How ZMK Module Discovery Works
 
-1. **West reads `config/west.yml`** and finds the `dao` module reference
-2. **West loads `modules/dao/zephyr/module.yml`** to get module metadata
-3. **Module.yml specifies `board_root: .`** which points to `modules/dao/`
+1. **West reads `config/west.yml`** and processes the `self.import` directive
+2. **West imports `modules/dao/zephyr/module.yml`** as part of the workspace
+3. **Module.yml specifies `board_root: .`** (relative to modules/dao/)
 4. **Zephyr finds boards** in `modules/dao/boards/dao/dao_left/` and `dao_right/`
 5. **Build system recognizes** `dao_left` and `dao_right` as valid boards
 6. **Firmware builds** with actual board definitions, not fallback code
