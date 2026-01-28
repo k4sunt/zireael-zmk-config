@@ -1,0 +1,33 @@
+# Copyright (c) 2021 Rafael Yumagulov
+# SPDX-License-Identifier: MIT
+
+if BOARD_DAO_RIGHT
+
+config BOARD
+	default "dao_right"
+
+config SOC
+	default "nrf52840_qiaa"
+
+config ARM
+	default y
+
+config CPU_CORTEX_M4
+	default y
+
+config ZMK_KEYBOARD_NAME
+	default "Dao Right"
+
+config ZMK_SPLIT
+	default y
+
+config BT_CTLR
+	default BT
+
+config ZMK_BATTERY_VOLTAGE_DIVIDER
+	default y
+
+config BUILD_OUTPUT_UF2
+	default y
+
+endif # BOARD_DAO_RIGHT

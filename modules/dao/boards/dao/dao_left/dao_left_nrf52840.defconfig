@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: MIT
+
+CONFIG_SOC_SERIES_NRF52X=y
+CONFIG_SOC_NRF52840_QIAA=y
+CONFIG_BOARD_DAO_LEFT=y
+
+# Split keyboard configuration - LEFT CENTRAL
+CONFIG_ZMK_SPLIT=y
+CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y
+CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS=1
+CONFIG_ZMK_SLEEP=y
+
+# Enable MPU
+CONFIG_ARM_MPU=y
+
+# enable GPIO
+CONFIG_GPIO=y
+
+# Enable writing to flash
+CONFIG_USE_DT_CODE_PARTITION=y
+CONFIG_MPU_ALLOW_FLASH_WRITE=y
+CONFIG_NVS=y
+CONFIG_SETTINGS_NVS=y
+CONFIG_FLASH=y
+CONFIG_FLASH_PAGE_LAYOUT=y
+CONFIG_FLASH_MAP=y
+
+# Debugging options - uncomment to troubleshoot split pairing issues
+# CONFIG_ZMK_USB_LOGGING=y
+# CONFIG_LOG=y
+# CONFIG_ZMK_LOG_LEVEL_DBG=y
+# CONFIG_BT_DEBUG_LOG=y
+# CONFIG_ZMK_BLE_CLEAR_BONDS_ON_START=y
+#
+# Disable sleep while debugging (helps identify power/wake issues)
+# CONFIG_ZMK_SLEEP=n
+# CONFIG_PM=n
+
+# Turn on uf2 build
+CONFIG_BUILD_OUTPUT_UF2=y
+
+# Increase transmit power level
+CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
+
+# Bluetooth configuration - central role, scans for peripherals
+CONFIG_ZMK_BLE=y
+CONFIG_BT_CENTRAL=y
+CONFIG_BT_DEVICE_NAME="Dao"
+
+# USB enabled on central for HID
+CONFIG_ZMK_USB=y
