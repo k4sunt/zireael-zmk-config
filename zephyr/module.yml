@@ -1,0 +1,5 @@
+build:
+  cmake-ext: True
+  kconfig-ext: True
+  settings:
+    board_root: modules/dao
