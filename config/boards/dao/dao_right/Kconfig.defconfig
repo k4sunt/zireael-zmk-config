@@ -6,6 +6,9 @@ if BOARD_DAO_RIGHT
 config BOARD
 	default "dao_right"
 
+config ARM
+	default y
+
 config ZMK_KEYBOARD_NAME
 	default "Dao Right"
 

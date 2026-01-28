@@ -6,8 +6,11 @@ if BOARD_DAO_LEFT
 config BOARD
 	default "dao_left"
 
+config ARM
+	default y
+
 config ZMK_KEYBOARD_NAME
-	default "Dao Left"
+	default "Dao"
 
 config ZMK_SPLIT_BLE_ROLE_CENTRAL
 	default y
