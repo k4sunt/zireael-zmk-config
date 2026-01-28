@@ -6,6 +6,9 @@ if BOARD_DAO_LEFT
 config BOARD
 	default "dao_left"
 
+config SOC
+	default "nrf52840_qiaa"
+
 config ARM
 	default y
 
