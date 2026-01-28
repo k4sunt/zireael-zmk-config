@@ -1,7 +1,0 @@
-board:
-  name: dao_left
-  vendor: dao
-  socs:
-    - name: nrf52840
-      variants:
-        - name: qiaa
