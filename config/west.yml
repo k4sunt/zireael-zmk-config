@@ -10,5 +10,3 @@ manifest:
   self:
     path: config
     west-commands: scripts/west-commands.yml
-    import:
-      - ../modules/dao/zephyr/module.yml

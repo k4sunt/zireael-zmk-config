@@ -97,10 +97,12 @@ include:
 ```yaml
 include:
   - board: dao_left
+    cmake-args: -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/modules/dao"
   - board: dao_right
+    cmake-args: -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/modules/dao"
 ```
 
-The module's `module.yml` now handles the board_root setting, so we don't need to specify it in build.yaml.
+Using `ZMK_EXTRA_MODULES` tells ZMK to load the dao module from the specified directory. The module's `module.yml` then provides the board_root setting.
 
 ### Step 3: Remove Deprecated Directory (Commit 89ef643)
 
@@ -109,21 +111,9 @@ Deleted `config/boards/` completely to avoid conflicts:
 rm -rf config/boards/
 ```
 
-### Step 4: Register Module in west.yml (Commit 73a1d17)
+### Step 4: No Changes to west.yml Required
 
-**Before:**
-```yaml
-manifest:
-  projects:
-    - name: zmk
-      remote: zmkfirmware
-      revision: main
-      import: app/west.yml
-  self:
-    path: config
-```
-
-**After:**
+**west.yml remains clean:**
 ```yaml
 manifest:
   projects:
@@ -134,18 +124,16 @@ manifest:
   self:
     path: config
     west-commands: scripts/west-commands.yml
-    import:
-      - ../modules/dao/zephyr/module.yml  # ← Import in-repo module
 ```
 
-This is **critical** - West needs to import the in-repo module to load it during the build. Note: In-repo modules use `self.import`, not `projects` (which is for external repos with URLs).
+**Note:** In-repo modules are loaded via `ZMK_EXTRA_MODULES` in build.yaml, not through west.yml. West manifest imports only work with other West manifest files, not Zephyr module.yml files.
 
 ---
 
 ## How ZMK Module Discovery Works
 
-1. **West reads `config/west.yml`** and processes the `self.import` directive
-2. **West imports `modules/dao/zephyr/module.yml`** as part of the workspace
+1. **Build.yaml specifies `ZMK_EXTRA_MODULES`** pointing to `modules/dao/`
+2. **ZMK build system loads the dao module** from the specified directory
 3. **Module.yml specifies `board_root: .`** (relative to modules/dao/)
 4. **Zephyr finds boards** in `modules/dao/boards/dao/dao_left/` and `dao_right/`
 5. **Build system recognizes** `dao_left` and `dao_right` as valid boards
